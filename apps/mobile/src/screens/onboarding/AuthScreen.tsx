@@ -37,7 +37,11 @@ export const AuthScreen = ({ navigation }: NativeStackScreenProps<OnboardingStac
   const onSubmit = handleSubmit(async ({ email }) => {
     try {
       setLoading(true);
-      const redirectUrl = process.env.EXPO_PUBLIC_SUPABASE_AUTH_REDIRECT;\n      const { error } = await supabase.auth.signInWithOtp({\n        email,\n        options: redirectUrl ? { emailRedirectTo: redirectUrl } : undefined,\n      });
+      const redirectUrl = process.env.EXPO_PUBLIC_SUPABASE_AUTH_REDIRECT;
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: redirectUrl ? { emailRedirectTo: redirectUrl } : undefined,
+      });
 
       if (error) {
         Alert.alert('Sign-in failed', error.message);
@@ -89,7 +93,7 @@ export const AuthScreen = ({ navigation }: NativeStackScreenProps<OnboardingStac
               loading={loading}
             />
             <Text className="text-center text-xs text-white/50">
-              We’ll send a sign-in link to your inbox. No password required.
+              We'll send a sign-in link to your inbox. No password required.
             </Text>
           </View>
         </View>
@@ -108,5 +112,3 @@ export const AuthScreen = ({ navigation }: NativeStackScreenProps<OnboardingStac
     </SafeAreaView>
   );
 };
-
-
