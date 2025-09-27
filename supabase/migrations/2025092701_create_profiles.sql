@@ -17,12 +17,12 @@ create unique index if not exists profiles_id_idx on public.profiles (id);
 create function public.handle_profiles_updated_at()
 returns trigger
 language plpgsql
-as 
+as $$
 begin
   new.updated_at = now();
   return new;
 end;
-;
+$$;
 
 create trigger handle_profiles_updated_at
   before update on public.profiles
@@ -45,4 +45,3 @@ create policy "Users can insert own profile"
   on public.profiles
   for insert
   with check (auth.uid() = id);
-
