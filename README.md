@@ -63,3 +63,6 @@ Collaborative hackathon project: a "Tinder-style" mobile app where founders swip
 - Add tests/seeds where relevant; flag gaps in PR if time-constrained
 
 _Last updated: 2025-09-26_
+
+
+
