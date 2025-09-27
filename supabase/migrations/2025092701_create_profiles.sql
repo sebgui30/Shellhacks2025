@@ -1,5 +1,7 @@
-create table if not exists public.profiles (
-  id uuid primary key references auth.users(id) on delete cascade,
+drop table if exists public.profiles cascade;
+
+create table public.profiles (
+  id uuid primary key,
   full_name text not null,
   headline text not null,
   bio text not null,
@@ -8,6 +10,7 @@ create table if not exists public.profiles (
   location text not null,
   avatar_url text,
   is_onboarded boolean not null default false,
+  is_seed boolean not null default false,
   created_at timestamp with time zone not null default now(),
   updated_at timestamp with time zone not null default now()
 );
@@ -31,17 +34,18 @@ create trigger handle_profiles_updated_at
 
 alter table public.profiles enable row level security;
 
-create policy "Users can view own profile"
+create policy "Profiles are viewable"
   on public.profiles
   for select
-  using (auth.uid() = id);
-
-create policy "Users can update own profile"
-  on public.profiles
-  for update
-  using (auth.uid() = id);
+  using (true);
 
 create policy "Users can insert own profile"
   on public.profiles
   for insert
+  with check (auth.uid() = id);
+
+create policy "Users can update own profile"
+  on public.profiles
+  for update
+  using (auth.uid() = id)
   with check (auth.uid() = id);
