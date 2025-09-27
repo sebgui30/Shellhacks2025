@@ -14,10 +14,20 @@ create table if not exists public.profiles (
 
 create unique index if not exists profiles_id_idx on public.profiles (id);
 
+create function public.handle_profiles_updated_at()
+returns trigger
+language plpgsql
+as 
+begin
+  new.updated_at = now();
+  return new;
+end;
+;
+
 create trigger handle_profiles_updated_at
   before update on public.profiles
   for each row
-  execute procedure public.set_current_timestamp_updated_at();
+  execute procedure public.handle_profiles_updated_at();
 
 alter table public.profiles enable row level security;
 
@@ -35,3 +45,4 @@ create policy "Users can insert own profile"
   on public.profiles
   for insert
   with check (auth.uid() = id);
+
