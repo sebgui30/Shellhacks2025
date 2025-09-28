@@ -1,30 +1,42 @@
 {
-    "expo":  {
-                 "name":  "Founder Connect",
-                 "slug":  "founder-connect",
-                 "version":  "1.0.0",
-                 "orientation":  "portrait",
-                 "icon":  "./assets/icon.png",
-                 "userInterfaceStyle":  "dark",
-                 "newArchEnabled":  true,
-                 "splash":  {
-                                "image":  "./assets/splash-icon.png",
-                                "resizeMode":  "contain",
-                                "backgroundColor":  "#0f172a"
-                            },
-                 "ios":  {
-                             "supportsTablet":  true
-                         },
-                 "android":  {
-                                 "adaptiveIcon":  {
-                                                      "foregroundImage":  "./assets/adaptive-icon.png",
-                                                      "backgroundColor":  "#0f172a"
-                                                  },
-                                 "edgeToEdgeEnabled":  true,
-                                 "predictiveBackGestureEnabled":  false
-                             },
-                 "web":  {
-                             "favicon":  "./assets/favicon.png"
-                         }
-             }
+  "expo": {
+    "name": "Founder Connect",
+    "slug": "founder-connect",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0f172a"
+    },
+    "plugins": [
+      "expo-notifications"
+    ],
+    "notification": {
+      "icon": "./assets/icon.png",
+      "color": "#FF231F7C",
+      "iosDisplayInForeground": true
+    },
+    "ios": {
+      "supportsTablet": true,
+      "entitlements": {
+        "aps-environment": "development"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f172a"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "useNextNotificationsApi": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
 }
